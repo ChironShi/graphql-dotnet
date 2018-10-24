@@ -1,0 +1,910 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GraphQL</name>
+    </assembly>
+    <members>
+        <member name="T:GraphQL.DataLoader.DataLoaderContext">
+            <summary>
+            Provides a way to register DataLoader instances
+            </summary>
+        </member>
+        <member name="M:GraphQL.DataLoader.DataLoaderContext.GetOrAdd``1(System.String,System.Func{``0})">
+            <summary>
+            Add a new data loader if one does not already exist with the provided key
+            </summary>
+            <typeparam name="TDataLoader">The type of <seealso cref="T:GraphQL.DataLoader.IDataLoader"/></typeparam>
+            <param name="loaderKey">Unique string to identify the <seealso cref="T:GraphQL.DataLoader.IDataLoader"/> instance</param>
+            <param name="dataLoaderFactory">Function to create the TDataLoader instance if it does not already exist</param>
+            <returns>Returns an existing TDataLoader instance or a newly created instance if it did not exist already</returns>
+        </member>
+        <member name="M:GraphQL.DataLoader.DataLoaderContext.DispatchAllAsync(System.Threading.CancellationToken)">
+            <summary>
+            Dispatch all registered data loaders
+            </summary>
+            <param name="cancellationToken">Optional <seealso cref="T:System.Threading.CancellationToken"/> to pass to fetch delegate</param>
+        </member>
+        <member name="M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddLoader``1(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Get or add a DataLoader instance for caching data fetching operations.
+            </summary>
+            <typeparam name="T">The type of data to be loaded</typeparam>
+            <param name="context">The <seealso cref="T:GraphQL.DataLoader.DataLoaderContext"/> to get or add a DataLoader to</param>
+            <param name="loaderKey">A unique key to identify the DataLoader instance</param>
+            <param name="fetchFunc">A cancellable delegate to fetch data asynchronously</param>
+            <returns>A new or existing DataLoader instance</returns>
+        </member>
+        <member name="M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddLoader``1(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Get or add a DataLoader instance for caching data fetching operations.
+            </summary>
+            <typeparam name="T">The type of data to be loaded</typeparam>
+            <param name="context">The <seealso cref="T:GraphQL.DataLoader.DataLoaderContext"/> to get or add a DataLoader to</param>
+            <param name="loaderKey">A unique key to identify the DataLoader instance</param>
+            <param name="fetchFunc">A delegate to fetch data asynchronously</param>
+            <returns>A new or existing DataLoader instance</returns>
+        </member>
+        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Collections.Generic.IDictionary{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0},``1)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Collections.Generic.IDictionary{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0},``1)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0},``1)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0},``1)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Linq.ILookup{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0})”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Linq.ILookup{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0})”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0})”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0})”忽略有格式错误的 XML 注释 -->
+        <member name="T:GraphQL.DataLoader.DataLoaderDocumentListener">
+            <summary>
+            Used to manage the <seealso cref="T:GraphQL.DataLoader.DataLoaderContext"/>
+            and automatically dispatch data loader operations at each execution step.
+            </summary>
+        </member>
+        <member name="T:GraphQL.DataLoader.IDataLoader">
+            <summary>
+            Provides a method to dispatch pending a operation to load data.
+            </summary>
+        </member>
+        <member name="M:GraphQL.DataLoader.IDataLoader.DispatchAsync(System.Threading.CancellationToken)">
+            <summary>
+            Dispatch any pending operations
+            </summary>
+            <param name="cancellationToken">Optional <seealso cref="T:System.Threading.CancellationToken"/> to pass to fetch delegate</param>
+        </member>
+        <member name="T:GraphQL.DataLoader.IDataLoader`1">
+            <summary>
+            Provides a method of queueing a data loading operation to be dispatched later.
+            </summary>
+            <typeparam name="T">The type of data to be loaded</typeparam>
+        </member>
+        <member name="M:GraphQL.DataLoader.IDataLoader`1.LoadAsync">
+            <summary>
+            Asynchronously load data
+            </summary>
+            <returns>
+            A task that will complete when the DataLoader has been dispatched,
+            or a completed task if the result is already cached.
+            </returns>
+        </member>
+        <member name="T:GraphQL.DataLoader.IDataLoader`2">
+            <summary>
+            Provides a method of queueing a data loading operation to be dispatched later.
+            </summary>
+            <typeparam name="TKey">The type of key to use to load data</typeparam>
+            <typeparam name="T">The type of data to be loaded</typeparam>
+        </member>
+        <member name="M:GraphQL.DataLoader.IDataLoader`2.LoadAsync(`0)">
+            <summary>
+            Asynchronously load data for the provided given key
+            </summary>
+            <param name="key">Key to use for loading data</param>
+            <returns>
+            A task that will complete when the DataLoader has been dispatched,
+            or a completed task if the result is already cached.
+            </returns>
+        </member>
+        <member name="T:GraphQL.DataLoader.IDataLoaderContextAccessor">
+            <summary>
+            Provides access to a <seealso cref="T:GraphQL.DataLoader.DataLoaderContext"/>
+            </summary>
+        </member>
+        <member name="P:GraphQL.DataLoader.IDataLoaderContextAccessor.Context">
+            <summary>
+            The current <seealso cref="T:GraphQL.DataLoader.DataLoaderContext"/>
+            </summary>
+        </member>
+        <member name="M:GraphQL.EnumerableExtensions.Apply``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Performs the indicated action on each item.
+            </summary>
+            <param name="action">The action to be performed.</param>
+            <remarks>If an exception occurs, the action will not be performed on the remaining items.</remarks>
+        </member>
+        <member name="M:GraphQL.Execution.ExecutionStrategy.ExecuteNodeAsync(GraphQL.Execution.ExecutionContext,GraphQL.Execution.ExecutionNode)">
+            <summary>
+            Execute a single node
+            </summary>
+            <remarks>
+            Builds child nodes, but does not execute them
+            </remarks>
+        </member>
+        <member name="M:GraphQL.GraphQLExtensions.IsSubtypeOf(GraphQL.Types.IGraphType,GraphQL.Types.IGraphType,GraphQL.Types.ISchema)">
+            <summary>
+            Provided a type and a super type, return true if the first type is either
+            equal or a subset of the second super type (covariant).
+            </summary>
+        </member>
+        <member name="M:GraphQL.GraphQLExtensions.DoTypesOverlap(GraphQL.Types.ISchema,GraphQL.Types.IGraphType,GraphQL.Types.IGraphType)">
+             <summary>
+             Provided two composite types, determine if they "overlap". Two composite
+             types overlap when the Sets of possible concrete types for each intersect.
+            
+             This is often used to determine if a fragment of a given type could possibly
+             be visited in a context of another type.
+            
+             This function is commutative.
+             </summary>
+        </member>
+        <member name="M:GraphQL.Http.DocumentWriterExtensions.WriteToStringAsync(GraphQL.Http.IDocumentWriter,GraphQL.ExecutionResult,System.Text.Encoding)">
+            <summary>
+            Writes the <paramref name="value"/> to string.
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="T:GraphQL.Http.HttpResponseStreamWriter">
+            <summary>
+            Writes to the <see cref="T:System.IO.Stream"/> using the supplied <see cref="P:GraphQL.Http.HttpResponseStreamWriter.Encoding"/>.
+            It does not write the BOM and also does not close the stream.
+            </summary>
+        </member>
+        <member name="T:GraphQL.IDependencyResolver">
+            <summary>
+            Basic DependencyResolver
+            </summary>
+        </member>
+        <member name="M:GraphQL.IDependencyResolver.Resolve``1">
+            <summary>
+            Resolves the specified type.
+            </summary>
+            <typeparam name="T">Desired type</typeparam>
+        </member>
+        <member name="M:GraphQL.IDependencyResolver.Resolve(System.Type)">
+            <summary>
+            Resolves the specified type.
+            </summary>
+            <param name="type">Desired type</param>
+        </member>
+        <member name="T:GraphQL.DefaultDependencyResolver">
+            <summary>
+            Dependency resolver based on Activator.CreateInstance
+            </summary>
+            <seealso cref="T:GraphQL.IDependencyResolver" />
+        </member>
+        <member name="M:GraphQL.DefaultDependencyResolver.Resolve``1">
+            <summary>
+            Resolves the specified type.
+            </summary>
+            <typeparam name="T">Desired type</typeparam>
+            <returns>T.</returns>
+        </member>
+        <member name="M:GraphQL.DefaultDependencyResolver.Resolve(System.Type)">
+            <summary>
+            Resolves the specified type.
+            </summary>
+            <param name="type">Desired type</param>
+            <returns>An instance of <paramref name="type"/>.</returns>
+        </member>
+        <member name="T:GraphQL.FuncDependencyResolver">
+            <summary>
+            Func based dependency resolver.
+            </summary>
+            <seealso cref="T:GraphQL.IDependencyResolver" />
+            <remarks>This is mainly used as an adapter for other dependency resolvers such as DI frameworks.</remarks>
+        </member>
+        <member name="M:GraphQL.FuncDependencyResolver.#ctor(System.Func{System.Type,System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:GraphQL.FuncDependencyResolver"/> class.
+            </summary>
+            <param name="resolver">The resolver function.</param>
+        </member>
+        <member name="M:GraphQL.FuncDependencyResolver.Resolve``1">
+            <summary>
+            Resolves the specified type.
+            </summary>
+            <typeparam name="T">Desired type</typeparam>
+        </member>
+        <member name="M:GraphQL.FuncDependencyResolver.Resolve(System.Type)">
+            <summary>
+            Resolves the specified type.
+            </summary>
+            <param name="type">Desired type</param>
+        </member>
+        <member name="M:GraphQL.Invariant.Check(System.Boolean,System.String)">
+            <summary>
+            Throws an ExecutionError if <c>valid</c> is false or <c>message</c> is empty.
+            </summary>
+        </member>
+        <member name="T:GraphQL.LightweightCache`2">
+            <summary>
+            A simple cache based on the provided dictionary.
+            </summary>
+            <typeparam name="TKey">The type of the t key.</typeparam>
+            <typeparam name="TValue">The type of the t value.</typeparam>
+            <seealso cref="T:System.Collections.Generic.IEnumerable`1" />
+            <remarks>https://github.com/JasperFx/baseline/blob/master/src/Baseline/LightweightCache.cs</remarks>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GraphQL.LightweightCache`2"/> class.
+            </summary>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.#ctor(System.Func{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:GraphQL.LightweightCache`2"/> class.
+            </summary>
+            <param name="onMissing">Action to perform if the key is missing. Defaults to <see cref="T:System.Collections.Generic.KeyNotFoundException"/></param>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.#ctor(System.Collections.Generic.IDictionary{`0,`1},System.Func{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:GraphQL.LightweightCache`2"/> class.
+            </summary>
+            <param name="dictionary">The dictionary implementation to use.</param>
+            <param name="onMissing">Action to perform if the key is missing. Defaults to <see cref="T:System.Collections.Generic.KeyNotFoundException"/></param>
+            <remarks>This takes a dependency on the provided dictionary. It does not simply copy its values.</remarks>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.#ctor(System.Collections.Generic.IDictionary{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:GraphQL.LightweightCache`2"/> class.
+            </summary>
+            <param name="dictionary">The dictionary implementation to use.</param>
+            <remarks>This takes a dependency on the provided dictionary. It does not simply copy its values.</remarks>
+        </member>
+        <member name="P:GraphQL.LightweightCache`2.OnMissing">
+            <summary>
+            Action to perform if the key is missing. Defaults to <see cref="T:System.Collections.Generic.KeyNotFoundException"/>
+            </summary>
+        </member>
+        <member name="P:GraphQL.LightweightCache`2.Count">
+            <summary>
+            Gets the count.
+            </summary>
+        </member>
+        <member name="P:GraphQL.LightweightCache`2.Item(`0)">
+            <summary>
+            Gets or sets the <see cref="!:TValue"/> with the specified key.
+            </summary>
+            <param name="key">The key.</param>
+        </member>
+        <member name="P:GraphQL.LightweightCache`2.Keys">
+            <summary>
+            Gets the keys.
+            </summary>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the values.
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the values.
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.FillDefault(`0)">
+            <summary>
+            Guarantees that the Cache has a value for a given key.
+            If it does not already exist, it's created using the OnMissing action.
+            </summary>
+            <param name="key">The key.</param>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.Fill(`0,`1)">
+            <summary>
+            Guarantees that the Cache has a value for a given key.
+            If it does not already exist, it's created using provided default value.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The default value.</param>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.TryRetrieve(`0,`1@)">
+            <summary>
+            Tries the retrieve a given key.
+            </summary>
+            <param name="key">The key to retrieve.</param>
+            <param name="value">The value for the associated key or <c>default(TValue)</c>.</param>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.Each(System.Action{`1})">
+            <summary>
+            Performs the specified action for each value.
+            </summary>
+            <param name="action">The action to be performed.</param>
+            <remarks>The order of execution is non-deterministic. If an error occurs, the action will not be performed on the remaining values.</remarks>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.Each(System.Action{`0,`1})">
+            <summary>
+            Performs the specified action for each key/value pair.
+            </summary>
+            <param name="action">The action to be performed.</param>
+            <remarks>The order of execution is non-deterministic. If an error occurs, the action will not be performed on the remaining values.</remarks>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.Has(`0)">
+            <summary>
+            Equivalent to ContainsKey
+            </summary>
+            <param name="key">The key.</param>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.Exists(System.Predicate{`1})">
+            <summary>
+            Determines if a given value exists in the dictionary.
+            </summary>
+            <param name="predicate">The search predicate.</param>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.Find(System.Predicate{`1})">
+            <summary>
+            Searches for a given value.
+            </summary>
+            <param name="predicate">The search predicate.</param>
+            <returns>The first matching value</returns>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.GetAll">
+            <summary>
+            Returns all values as an array
+            </summary>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.Remove(`0)">
+            <summary>
+            Removes the specified key.
+            </summary>
+            <param name="key">The key.</param>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.Clear">
+            <summary>
+            Clears this instance of all key/value pairs.
+            </summary>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.WithValue(`0,System.Action{`1})">
+            <summary>
+            If the dictionary contains the indicated key, performs the action with its value.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="action">The action to be performed.</param>
+        </member>
+        <member name="M:GraphQL.LightweightCache`2.ClearAll">
+            <summary>
+            Equivalent to Clear()
+            </summary>
+        </member>
+        <member name="M:GraphQL.ObjectExtensions.ToObject``1(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Creates a new instance of the indicated type, populating it with the dictionary.
+            </summary>
+            <typeparam name="T">The type to create.</typeparam>
+            <param name="source">The source of values.</param>
+            <returns>T.</returns>
+        </member>
+        <member name="M:GraphQL.ObjectExtensions.ToObject(System.Collections.Generic.IDictionary{System.String,System.Object},System.Type)">
+            <summary>
+            Creates a new instance of the indicated type, populating it with the dictionary.
+            </summary>
+            <param name="source">The source of values.</param>
+            <param name="type">The type to create.</param>
+        </member>
+        <member name="M:GraphQL.ObjectExtensions.GetPropertyValue(System.Object,System.Type)">
+            <summary>
+            Converts the indicated value into a type that is compatible with fieldType.
+            </summary>
+            <param name="propertyValue">The value to be converted.</param>
+            <param name="fieldType">The desired type.</param>
+            <remarks>There is special handling for strings, IEnumerable&lt;T&gt;, Nullable&lt;T&gt;, and Enum.</remarks>
+        </member>
+        <member name="M:GraphQL.ObjectExtensions.GetPropertyValue(System.Object,System.String)">
+            <summary>
+            Gets the value of the named property.
+            </summary>
+            <param name="obj">The object to be read.</param>
+            <param name="propertyName">Name of the property.</param>
+            <returns>System.Object.</returns>
+        </member>
+        <member name="M:GraphQL.ObjectExtensions.GetInterface(System.Type,System.String)">
+            <summary>
+            Returns an interface implemented by the indicated type whose name matches the desired name.
+            </summary>
+            <param name="type">The type to check.</param>
+            <param name="name">The name of the desired interface. This is case sensitive.</param>
+            <returns>The interface, or <c>null</c> if no matches were found.</returns>
+            <remarks>If more than one interface matches, the returned interface is non-deterministic.</remarks>
+        </member>
+        <member name="M:GraphQL.ObjectExtensions.IsDefinedEnumValue(System.Type,System.Object)">
+            <summary>
+            Returns true is the value is null, value.ToString equals an empty string, or the value can be converted into a named enum value.
+            </summary>
+            <param name="type">An enum type.</param>
+            <param name="value">The value being tested.</param>
+        </member>
+        <member name="M:GraphQL.ObjectExtensions.AsDictionary(System.Object,System.Reflection.BindingFlags)">
+            <summary>
+            Converts an object into a dictionary.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="flags">The binding flags used to control which properties are read.</param>
+        </member>
+        <member name="T:GraphQL.Reflection.IAccessor">
+            <summary>
+            An abstraction around accessing a property or method on a object instance
+            </summary>
+        </member>
+        <member name="M:GraphQL.Reflection.ReflectionHelper.ToAccessor(System.Type,System.String,GraphQL.ResolverType)">
+            <summary>
+            Creates an Accessor for the indicated GraphQL field
+            </summary>
+            <param name="type">The type to check.</param>
+            <param name="field">The desired field.</param>
+            <param name="resolverType">defaults to Resolver</param>
+        </member>
+        <member name="M:GraphQL.Reflection.ReflectionHelper.MethodForField(System.Type,System.String,GraphQL.ResolverType)">
+            <summary>
+            Returns the method associated with the indicated GraphQL field
+            </summary>
+            <param name="type">The type to check.</param>
+            <param name="field">The desired field.</param>
+        </member>
+        <member name="M:GraphQL.Reflection.ReflectionHelper.PropertyForField(System.Type,System.String)">
+            <summary>
+            Returns the property associated with the indicated GraphQL field
+            </summary>
+            <param name="type">The type to check.</param>
+            <param name="field">The desired field.</param>
+        </member>
+        <member name="M:GraphQL.StringExtensions.IsEmpty(System.String)">
+            <summary>
+            Determines whether the specified string is empty.
+            </summary>
+            <param name="str">The string.</param>
+            <returns><c>true</c> if the specified string is empty; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:GraphQL.StringExtensions.ToDelimitedArray(System.String)">
+            <summary>
+            Splits a string on commas (,)
+            </summary>
+            <param name="content">The string to split.</param>
+        </member>
+        <member name="M:GraphQL.StringExtensions.ToDelimitedArray(System.String,System.Char)">
+            <summary>
+            Splits a string on the indicated character.
+            </summary>
+            <param name="content">The string to split.</param>
+            <param name="delimiter">The delimiter.</param>
+        </member>
+        <member name="M:GraphQL.StringExtensions.ToEnumerable(System.String)">
+            <summary>
+            Equivalent to String.GetEnumerator.
+            </summary>
+            <param name="this">The this.</param>
+        </member>
+        <member name="M:GraphQL.StringExtensions.ToStr(System.Collections.Generic.IEnumerable{System.Char})">
+            <summary>
+            Converts an enumeration of Char into a string.
+            </summary>
+            <param name="chars">The chars.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:GraphQL.StringExtensions.ToFormat(System.String,System.Object[])">
+            <summary>
+            Equivalent to String.Format.
+            </summary>
+            <param name="format">The format string in String.Format style.</param>
+            <param name="args">The arguments.</param>
+        </member>
+        <member name="M:GraphQL.StringExtensions.ToInputs(System.String)">
+            <summary>
+            Converts a JSON-formatted string into a dictionary.
+            </summary>
+            <param name="json">A JSON formatted string.</param>
+            <returns>Inputs.</returns>
+        </member>
+        <member name="M:GraphQL.StringExtensions.ToInputs(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Converts a JSON object into a dictionary.
+            </summary>
+        </member>
+        <member name="M:GraphQL.StringExtensions.ToDictionary(System.String)">
+            <summary>
+            Converts a JSON formatted string into a the dictionary.
+            </summary>
+            <param name="json">The json.</param>
+            <returns>Returns a <c>null</c> if the object cannot be converted into a dictionary.</returns>
+        </member>
+        <member name="M:GraphQL.StringExtensions.ToCamelCase(System.String)">
+            <summary>
+            Returns a camel case version of the string.
+            </summary>
+        </member>
+        <member name="M:GraphQL.StringExtensions.ToPascalCase(System.String)">
+            <summary>
+            Returns a pascal case version of the string.
+            </summary>
+            <param name="s">The s.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:GraphQL.StringExtensions.GetValue(System.Object)">
+            <summary>
+            Gets the value contained in a JObject, JValue, JProperty, or JArray.
+            </summary>
+            <param name="value">The object containing the value to extract.</param>
+            <remarks>If the value is a recognized type, it is returned unaltered.</remarks>
+        </member>
+        <member name="T:GraphQL.TaskExtensions">
+            <summary>
+            Task extensions.
+            </summary>
+        </member>
+        <member name="P:GraphQL.TaskExtensions.CompletedTask">
+            <summary>
+            Returns a completed task. Equivalent to Task.CompletedTask.
+            </summary>
+        </member>
+        <member name="M:GraphQL.TaskExtensions.GetResult(System.Threading.Tasks.Task)">
+            <summary>
+            Gets the result of a completed <see cref="T:System.Threading.Tasks.Task`1"/> when TResult is not known
+            </summary>
+            <remarks>
+            The Task should already be awaited or this call will block.
+            This will also throw an exception if the task is not Task&lt;TResult&gt;.
+            </remarks>
+            <param name="task">A task that has already been awaited</param>
+            <returns></returns>
+        </member>
+        <member name="M:GraphQL.TypeExtensions.As``1(System.Object)">
+            <summary>
+            Conditionally casts the item into the indicated type using an "as" cast.
+            </summary>
+            <typeparam name="T">The desired type</typeparam>
+            <param name="item">The item.</param>
+            <returns><c>null</c> if the cast failed, otherwise item as T</returns>
+        </member>
+        <member name="M:GraphQL.TypeExtensions.IsConcrete(System.Type)">
+            <summary>
+            Determines whether this instance is a concrete type.
+            </summary>
+            <param name="type">The type to check.</param>
+            <returns>
+              <c>true</c> if the specified type is neither abstract nor an interface; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:GraphQL.TypeExtensions.IsNullable(System.Type)">
+            <summary>
+            Determines whether this instance is a subclass of Nullable&lt;T&gt;.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>
+              <c>true</c> if the specified type is a subclass of Nullable&lt;T&gt;; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:GraphQL.TypeExtensions.FirstValue``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Returns the first non-null value from executing the func against the enumerable
+            </summary>
+            <returns><c>null</c> is all values were null.</returns>
+        </member>
+        <member name="M:GraphQL.TypeExtensions.IsGraphType(System.Type)">
+            <summary>
+            Determines whether the indicated type implements IGraphType.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>
+              <c>true</c> if the indicated type implements IGraphType; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:GraphQL.TypeExtensions.GraphQLName(System.Type)">
+            <summary>
+            Gets the GraphQL name of the type. This is derived from the type name and can be overridden by the GraphQLMetadata Attribute.
+            </summary>
+            <param name="type">The indicated type.</param>
+            <returns>A string containing a GraphQL compatible type name.</returns>
+        </member>
+        <member name="M:GraphQL.TypeExtensions.GetGraphTypeFromType(System.Type,System.Boolean)">
+            <summary>
+            Gets the graph type for the indicated type.
+            </summary>
+            <param name="type">The type for which a graph type is desired.</param>
+            <param name="isNullable">if set to <c>false</c> if the type explicitly non-nullable.</param>
+            <returns>A Type object representing a GraphType that matches the indicated type.</returns>
+            <remarks>This can handle arrays and lists, but not other collection types.</remarks>
+        </member>
+        <member name="T:GraphQL.Types.DirectiveGraphType">
+            <summary>
+            Directives are used by the GraphQL runtime as a way of modifying execution
+            behavior.Type system creators will usually not create these directly.
+            </summary>
+        </member>
+        <member name="T:GraphQL.Types.IncludeDirective">
+            <summary>
+            Used to conditionally include fields or fragments.
+            </summary>
+        </member>
+        <member name="T:GraphQL.Types.SkipDirective">
+            <summary>
+            Used to conditionally skip (exclude) fields or fragments.
+            </summary>
+        </member>
+        <member name="T:GraphQL.Types.GraphQLDeprecatedDirective">
+            <summary>
+            Used to declare element of a GraphQL schema as deprecated.
+            </summary>
+        </member>
+        <member name="T:GraphQL.Types.TypeCollectionContext">
+            <summary>
+            This sucks, find a better way
+            </summary>
+        </member>
+        <member name="P:GraphQL.Types.ResolveFieldContext`1.SubFields">
+            <summary>
+            Queried sub fields
+            </summary>
+        </member>
+        <member name="M:GraphQL.Utilities.SchemaPrinter.IsSchemaOfCommonNames(GraphQL.Types.ISchema)">
+             GraphQL schema define root types for each type of operation. These types are
+             the same as any other type and can be named in any manner, however there is
+             a common naming convention:
+            
+               schema {
+                 query: Query
+                 mutation: Mutation
+                 subscription: Subscription
+               }
+            
+             When using this naming convention, the schema description can be omitted.
+        </member>
+        <member name="M:GraphQL.Utilities.StringUtils.ToWords(System.String)">
+            <summary>
+            Split a cased string into a series of "words" excluding the separator if applicable.
+            </summary>
+        </member>
+        <member name="M:GraphQL.Utilities.StringUtils.QuotedOrList(System.Collections.Generic.IEnumerable{System.String},System.Int32)">
+            <summary>
+            Given [ A, B, C ] return '"A", "B", or "C"'.
+            </summary>
+        </member>
+        <member name="M:GraphQL.Utilities.StringUtils.SuggestionList(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Given an invalid input string and a list of valid options, returns a filtered
+            list of valid options sorted based on their similarity with the input.
+            </summary>
+        </member>
+        <member name="M:GraphQL.Utilities.StringUtils.DamerauLevenshteinDistance(System.String,System.String,System.Int32)">
+            <summary>
+            Computes the Damerau-Levenshtein Distance between two strings, represented as arrays of
+            integers, where each integer represents the code point of a character in the source string.
+            Includes an optional threshold which can be used to indicate the maximum allowable distance.
+            http://stackoverflow.com/a/9454016/279764
+            </summary>
+            <param name="source">An array of the code points of the first string</param>
+            <param name="target">An array of the code points of the second string</param>
+            <param name="threshold">Maximum allowable distance</param>
+            <returns>Int.MaxValue if threshold exceeded; otherwise the Damerau-Levenshtein distance between the strings</returns>
+        </member>
+        <member name="M:GraphQL.Validation.Complexity.ComplexityAnalyzer.#ctor(System.Int32)">
+            <summary>
+            Creates a new instance of ComplexityAnalyzer
+            </summary>
+            <param name="maxRecursionCount">
+            Max. number of times to traverse tree nodes. GraphiQL queries take ~95 iterations, adjust as needed.
+            </param>
+        </member>
+        <member name="M:GraphQL.Validation.Complexity.ComplexityAnalyzer.Analyze(GraphQL.Language.AST.Document,System.Double)">
+            <summary>
+            Analyzes the complexity of a document.
+            </summary>
+        </member>
+        <member name="M:GraphQL.Validation.Complexity.IComplexityAnalyzer.Validate(GraphQL.Language.AST.Document,GraphQL.Validation.Complexity.ComplexityConfiguration)">
+            <exception cref="T:System.InvalidOperationException">
+            Thrown if complexity is not within the defined range in parameters.
+            </exception>
+        </member>
+        <member name="P:GraphQL.Validation.Complexity.ComplexityConfiguration.FieldImpact">
+            <summary>
+            Hardcoded maximum number of objects returned by each field.
+            If there is no hardcoded maximum then use the average number of rows/objects returned by each field.
+            </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.ArgumentsOfCorrectType">
+             <summary>
+             Argument values of correct type
+            
+             A GraphQL document is only valid if all field argument literal values are
+             of the type expected by their position.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.DefaultValuesOfCorrectType">
+             <summary>
+             Variable default values of correct type
+            
+             A GraphQL document is only valid if all variable default values are of the
+             type expected by their definition.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.FieldsOnCorrectType">
+             <summary>
+             Fields on correct type
+            
+             A GraphQL document is only valid if all fields selected are defined by the
+             parent type, or are an allowed meta field such as __typename
+             </summary>
+        </member>
+        <member name="M:GraphQL.Validation.Rules.FieldsOnCorrectType.getSuggestedTypeNames(GraphQL.Types.ISchema,GraphQL.Types.IGraphType,System.String)">
+            <summary>
+            Go through all of the implementations of type, as well as the interfaces
+            that they implement. If any of those types include the provided field,
+            suggest them, sorted by how often the type is referenced,  starting
+            with Interfaces.
+            </summary>
+        </member>
+        <member name="M:GraphQL.Validation.Rules.FieldsOnCorrectType.getSuggestedFieldNames(GraphQL.Types.IGraphType,System.String)">
+            <summary>
+            For the field name provided, determine if there are any similar field names
+            that may be the result of a typo.
+            </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.FragmentsOnCompositeTypes">
+             <summary>
+             Fragments on composite type
+            
+             Fragments use a type condition to determine if they apply, since fragments
+             can only be spread into a composite type (object, interface, or union), the
+             type condition must also be a composite type.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.KnownArgumentNames">
+             <summary>
+             Known argument names
+            
+             A GraphQL field is only valid if all supplied arguments are defined by
+             that field.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.KnownDirectives">
+             <summary>
+             Known directives
+            
+             A GraphQL document is only valid if all `@directives` are known by the
+             schema and legally positioned.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.KnownFragmentNames">
+             <summary>
+             Known fragment names
+            
+             A GraphQL document is only valid if all <c>...Fragment</c> fragment spreads refer
+             to fragments defined in the same document.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.KnownTypeNames">
+             <summary>
+             Known type names
+            
+             A GraphQL document is only valid if referenced types (specifically
+             variable definitions and fragment conditions) are defined by the type schema.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.LoneAnonymousOperation">
+             <summary>
+             Lone anonymous operation
+            
+             A GraphQL document is only valid if when it contains an anonymous operation
+             (the query short-hand) that it contains only that one operation definition.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.NoFragmentCycles">
+            <summary>
+            No fragment cycles
+            </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.NoUndefinedVariables">
+             <summary>
+             No undefined variables
+            
+             A GraphQL operation is only valid if all variables encountered, both directly
+             and via fragment spreads, are defined by that operation.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.NoUnusedFragments">
+             <summary>
+             No unused fragments
+            
+             A GraphQL document is only valid if all fragment definitions are spread
+             within operations, or spread within other fragments spread within operations.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.NoUnusedVariables">
+             <summary>
+             No unused variables
+            
+             A GraphQL operation is only valid if all variables defined by that operation
+             are used in that operation or a fragment transitively included by that
+             operation.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.PossibleFragmentSpreads">
+             <summary>
+             Possible fragment spread
+            
+             A fragment spread is only valid if the type condition could ever possibly
+             be true: if there is a non-empty intersection of the possible parent types,
+             and possible types which pass the type condition.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.ProvidedNonNullArguments">
+             <summary>
+             Provided required arguments
+            
+             A field or directive is only valid if all required (non-null) field arguments
+             have been provided.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.ScalarLeafs">
+             <summary>
+             Scalar leafs
+            
+             A GraphQL document is valid only if all leaf fields (fields without
+             sub selections) are of scalar or enum types.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.UniqueDirectivesPerLocation">
+             <summary>
+             Unique directive names per location
+            
+             A GraphQL document is only valid if all directives at a given location
+             are uniquely named.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.UniqueFragmentNames">
+             <summary>
+             Unique fragment names
+            
+             A GraphQL document is only valid if all defined fragments have unique names.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.UniqueInputFieldNames">
+             <summary>
+             Unique input field names
+            
+             A GraphQL input object value is only valid if all supplied fields are
+             uniquely named.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.UniqueOperationNames">
+             <summary>
+             Unique operation names
+            
+             A GraphQL document is only valid if all defined operations have unique names.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.UniqueVariableNames">
+             <summary>
+             Unique variable names
+            
+             A GraphQL operation is only valid if all its variables are uniquely named.
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.VariablesAreInputTypes">
+             <summary>
+             Variables are input types
+            
+             A GraphQL operation is only valid if all the variables it defines are of
+             input types (scalar, enum, or input object).
+             </summary>
+        </member>
+        <member name="T:GraphQL.Validation.Rules.VariablesInAllowedPosition">
+            <summary>
+            Variables passed to field arguments conform to type
+            </summary>
+        </member>
+        <member name="M:GraphQL.Validation.Rules.VariablesInAllowedPosition.effectiveType(GraphQL.Types.IGraphType,GraphQL.Language.AST.VariableDefinition)">
+            <summary>
+            if a variable definition has a default value, it is effectively non-null.
+            </summary>
+        </member>
+    </members>
+</doc>

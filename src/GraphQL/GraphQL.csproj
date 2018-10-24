@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>GraphQL for .NET</Description>
-    <VersionPrefix>2.3.0</VersionPrefix>
+    <VersionPrefix>2.3.1-cs</VersionPrefix>
     <Authors>Joe McBride</Authors>
     <TargetFrameworks>netstandard2.0;netstandard1.3;net45</TargetFrameworks>
     <AssemblyName>GraphQL</AssemblyName>
@@ -19,6 +19,14 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
     <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DocumentationFile>D:\Users\ChironShi\Workspace\CsSofts\Goods\GraphQL\graphql-dotnet\src\GraphQL\GraphQL.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>D:\Users\ChironShi\Workspace\CsSofts\Goods\GraphQL\graphql-dotnet\src\GraphQL\GraphQL.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
