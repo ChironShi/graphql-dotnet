@@ -76,6 +76,13 @@ namespace GraphQL.DataLoader
             }
             else
             {
+                lock (_cache)
+                {
+                    if (_cache.TryGetValue(key, out T cacheValue))
+                    {
+                        return cacheValue;
+                    }
+                }
                 return _defaultValue;
             }
         }

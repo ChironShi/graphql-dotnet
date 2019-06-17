@@ -61,8 +61,15 @@ namespace GraphQL.DataLoader
             }
 
             var result = await DataLoaded;
-
-            return result[key];
+            var rv = result[key];
+            if (rv == null)
+            {
+                lock (_cache)
+                {
+                    _cache.TryGetValue(key, out rv);
+                }
+            }
+            return rv;
         }
 
         protected override bool IsFetchNeeded()
