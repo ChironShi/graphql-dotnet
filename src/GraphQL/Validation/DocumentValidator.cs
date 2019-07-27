@@ -13,7 +13,7 @@ namespace GraphQL.Validation
             ISchema schema,
             Document document,
             IEnumerable<IValidationRule> rules = null,
-            object userContext = null,
+            IDictionary<string, object> userContext = null,
             Inputs inputs = null);
     }
 
@@ -24,7 +24,7 @@ namespace GraphQL.Validation
             ISchema schema,
             Document document,
             IEnumerable<IValidationRule> rules = null,
-            object userContext = null,
+            IDictionary<string, object> userContext = null,
             Inputs inputs = null)
         {
             if (!schema.Initialized)
@@ -69,6 +69,7 @@ namespace GraphQL.Validation
             {
                 new UniqueOperationNames(),
                 new LoneAnonymousOperation(),
+                new SingleRootFieldSubscriptions(),
                 new KnownTypeNames(),
                 new FragmentsOnCompositeTypes(),
                 new VariablesAreInputTypes(),

@@ -4,7 +4,7 @@
 
 A GraphQL object type has a name and fields, but at some point those fields have to resolve to some concrete data. That's where the scalar types come in: they represent the leaves of the query.
 
-These are the scalars provided by the GraphQL Specificiation.  You can extend your schema with your own custom scalars.
+These are the scalars provided by the GraphQL Specification.
 
 | GraphQL     | GraphQL .NET        | .NET                    |
 |-------------|---------------------|-------------------------|
@@ -25,12 +25,22 @@ These are additional scalars provided by this project.
 | `DateTimeOffset` | `DateTimeOffsetGraphType`       | `DateTimeOffset`   |
 | `Seconds`        | `TimeSpanSecondsGraphType`      | `TimeSpan`         |
 | `Milliseconds`   | `TimeSpanMillisecondsGraphType` | `TimeSpan`         |
+| `Decimal` | `DecimalGraphType` | `decimal` |
+| `Uri` | `UriGraphType` | `Uri` |
+| `Guid` | `GuidGraphType` | `Guid` |
+| `Short` | `ShortGraphType` | `short` |
+| `UShort` | `UShortGraphType` | `ushort` |
+| `UInt` | `UIntGraphType` | `uint` |
+| `ULong` | `ULongGraphType` | `ulong` |
+| `Byte` | `ByteGraphType` | `byte` |
+| `SByte` | `SByteGraphType` | `sbyte` 
 
 Lists of data are also supported with any Scalar or Object types.
 
 | GraphQL    | GraphQL .NET                        | .NET           |
 | -----------|-------------------------------------|----------------|
 | `[String]` | `ListGraphType<StringGraphType>`    | `List<string>` |
+| `[Boolean]` | `ListGraphType<BooleanGraphType>`    | `List<bool>` |
 
 ## Objects
 
@@ -100,7 +110,7 @@ public class EpisodeEnum : EnumerationGraphType
 }
 ```
 
-Or you can use the generic version passing it a .NET `enum` which will populate the values for you (excluding description).  The `Name` will default to the .NET Type name, which you can override in the constructor.
+Or you can use the generic version passing it a .NET `enum` which will populate values and descriptions (if any defined via `DescriptionAttribute`) for you. The `Name` will default to the .NET Type name, which you can override in the constructor.
 
 ```csharp
 public class EpisodeEnum : EnumerationGraphType<Episodes>

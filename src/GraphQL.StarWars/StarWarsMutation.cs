@@ -1,4 +1,4 @@
-﻿using GraphQL.StarWars.Types;
+using GraphQL.StarWars.Types;
 using GraphQL.Types;
 
 namespace GraphQL.StarWars
@@ -28,7 +28,7 @@ namespace GraphQL.StarWars
                 resolve: context =>
                 {
                     var human = context.GetArgument<Human>("human");
-                    return data.AddHuman(human);
+                    return data.AddCharacter(human);
                 });
         }
     }

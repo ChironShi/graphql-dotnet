@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using GraphQL.Language.AST;
 using GraphQL.Types;
 using GraphQL.Utilities;
@@ -26,7 +25,7 @@ namespace GraphQL.Validation
 
         public TypeInfo TypeInfo { get; set; }
 
-        public object UserContext { get; set; }
+        public IDictionary<string, object> UserContext { get; set; }
 
         public IEnumerable<ValidationError> Errors => _errors;
 

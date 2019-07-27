@@ -6,7 +6,7 @@ namespace GraphQL.Introspection
     {
         public __EnumValue()
         {
-            Name = "__EnumValue";
+            Name = nameof(__EnumValue);
             Description =
                 "One possible value for a given Enum. Enum values are unique values, not " +
                 "a placeholder for a string or numeric value. However an Enum value is " +
@@ -15,7 +15,7 @@ namespace GraphQL.Introspection
             Field(f => f.Name);
             Field(f => f.Description, nullable: true);
 
-            Field<NonNullGraphType<StringGraphType>>("isDeprecated", resolve: context =>
+            Field<NonNullGraphType<BooleanGraphType>>("isDeprecated", resolve: context =>
             {
                 return !string.IsNullOrWhiteSpace(context.Source?.DeprecationReason);
             });

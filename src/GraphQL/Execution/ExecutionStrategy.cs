@@ -116,11 +116,27 @@ namespace GraphQL.Execution
                     {
                         SetSubFieldNodes(context, objectNode);
                     }
+                    else if (node is ArrayExecutionNode arrayNode)
+                    {
+                        SetArrayItemNodes(context, arrayNode);
+                    }
 
                     arrayItems.Add(node);
                 }
                 else
                 {
+                    if (listType.ResolvedType is NonNullGraphType)
+                    {
+                        var error = new ExecutionError(
+                            "Cannot return null for non-null type."
+                            + $" Field: {parent.Name}, Type: {parent.FieldDefinition.ResolvedType}.");
+
+                        error.AddLocation(parent.Field, context.Document);
+                        error.Path = path;
+                        context.Errors.Add(error);
+                        return;
+                    }
+
                     var valueExecutionNode = new ValueExecutionNode(parent, itemType, parent.Field, parent.FieldDefinition, path)
                     {
                         Result = null
@@ -258,15 +274,13 @@ namespace GraphQL.Execution
 
             if (fieldType is NonNullGraphType nonNullType)
             {
-                objectType = nonNullType?.ResolvedType as IObjectGraphType;
-
                 if (result == null)
                 {
-                    var type = nonNullType.ResolvedType;
-
-                    var error = new ExecutionError($"Cannot return null for non-null type. Field: {node.Name}, Type: {type.Name}!.");
-                    throw error;
+                    throw new ExecutionError("Cannot return null for non-null type."
+                        + $" Field: {node.Name}, Type: {nonNullType}.");
                 }
+
+                objectType = nonNullType.ResolvedType as IObjectGraphType;
             }
 
             if (result == null)

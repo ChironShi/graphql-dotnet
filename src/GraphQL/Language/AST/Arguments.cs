@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +13,12 @@ namespace GraphQL.Language.AST
 
         public void Add(Argument arg)
         {
-            _arguments.Add(arg);
+            _arguments.Add(arg ?? throw new ArgumentNullException(nameof(arg)));
         }
 
-        public IValue ValueFor(string name)
-        {
-            var arg = _arguments.FirstOrDefault(x => x.Name == name);
-            return arg?.Value;
-        }
+        public IValue ValueFor(string name) => _arguments.FirstOrDefault(x => x.Name == name)?.Value;
 
-        protected bool Equals(Arguments args)
-        {
-            return false;
-        }
+        protected bool Equals(Arguments args) => false;
 
         public override bool IsEqualTo(INode obj)
         {
@@ -34,14 +28,8 @@ namespace GraphQL.Language.AST
             return Equals((Arguments) obj);
         }
 
-        public IEnumerator<Argument> GetEnumerator()
-        {
-            return _arguments.GetEnumerator();
-        }
+        public IEnumerator<Argument> GetEnumerator() => _arguments.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

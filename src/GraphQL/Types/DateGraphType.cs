@@ -1,5 +1,5 @@
-using System;
 using GraphQL.Language.AST;
+using System;
 
 namespace GraphQL.Types
 {
@@ -24,16 +24,13 @@ namespace GraphQL.Types
             return null;
         }
 
-        public override object ParseValue(object value)
-        {
-            return ValueConverter.ConvertTo(value, typeof(DateTime));
-        }
+        public override object ParseValue(object value) => ValueConverter.ConvertTo(value, typeof(DateTime));
 
         public override object ParseLiteral(IValue value)
         {
             if (value is DateTimeValue timeValue)
             {
-                return ParseValue(timeValue.Value);
+                return timeValue.Value;
             }
 
             if (value is StringValue stringValue)

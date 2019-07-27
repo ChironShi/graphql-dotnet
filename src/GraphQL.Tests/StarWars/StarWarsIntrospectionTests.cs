@@ -125,6 +125,13 @@ namespace GraphQL.Tests.StarWars
                       }
                     },
                     {
+                      name: 'friendsConnection',
+                      type: {
+                        name: 'CharacterInterfaceConnection',
+                        kind: 'OBJECT'
+                      }
+                    },
+                    {
                       name: 'id',
                       type: {
                         name: null,
@@ -240,6 +247,38 @@ namespace GraphQL.Tests.StarWars
                   'kind': 'SCALAR'
                 },
                 {
+                  'name': 'Uri',
+                  'kind': 'SCALAR'
+                },
+                {
+                  'name': 'Guid',
+                  'kind': 'SCALAR',
+                },
+                {
+                  'name': 'Short',
+                  'kind': 'SCALAR',
+                },
+                {
+                  'name': 'UShort',
+                  'kind': 'SCALAR',
+                },
+                {
+                  'name': 'UInt',
+                  'kind': 'SCALAR',
+                },
+                {
+                  'name': 'ULong',
+                  'kind': 'SCALAR',
+                },
+                {
+                  'name': 'Byte',
+                  'kind': 'SCALAR'
+                },
+                {
+                  'name': 'SByte',
+                  'kind': 'SCALAR'
+                },
+                {
                   'name': '__Schema',
                   'kind': 'OBJECT'
                 },
@@ -285,6 +324,18 @@ namespace GraphQL.Tests.StarWars
                 },
                 {
                   'name': 'Human',
+                  'kind': 'OBJECT'
+                },
+                {
+                  'name': 'CharacterInterfaceConnection',
+                  'kind': 'OBJECT'
+                },
+                {
+                  'name': 'PageInfo',
+                  'kind': 'OBJECT'
+                },
+                {
+                  'name': 'CharacterInterfaceEdge',
                   'kind': 'OBJECT'
                 },
                 {

@@ -18,13 +18,11 @@ namespace GraphQL.Tests.Execution
         [Fact]
         public void nested_groups_work()
         {
-            var product = new ObjectGraphType();
-            product.Name = "Product";
+            var product = new ObjectGraphType {Name = "Product"};
             product.Field("name", new StringGraphType());
             product.IsTypeOf = obj => obj is Product;
 
-            var catalog = new ObjectGraphType();
-            catalog.Name = "Catalog";
+            var catalog = new ObjectGraphType {Name = "Catalog"};
             catalog.Field("products", new ListGraphType(product), resolve: ctx =>
             {
                 return new List<Product> {
@@ -32,16 +30,13 @@ namespace GraphQL.Tests.Execution
                 };
             });
 
-            var retail = new ObjectGraphType();
-            retail.Name = "Retail";
+            var retail = new ObjectGraphType {Name = "Retail"};
             retail.Field("catalog", catalog, resolve: ctx => new {});
 
-            var root = new ObjectGraphType();
-            root.Name = "Root";
+            var root = new ObjectGraphType {Name = "Root"};
             root.Field("retail", retail, resolve: ctx => new {});
 
-            var schema = new Schema();
-            schema.Query = root;
+            var schema = new Schema {Query = root};
             schema.RegisterTypes(retail);
             schema.RegisterTypes(catalog);
 
@@ -57,16 +52,14 @@ namespace GraphQL.Tests.Execution
         {
             var schema = new Schema();
 
-            var person = new ObjectGraphType();
-            person.Name = "Person";
+            var person = new ObjectGraphType {Name = "Person"};
             person.Field("name", new StringGraphType());
             person.Field(
                 "friends",
                 new ListGraphType(new NonNullGraphType(person)),
                 resolve: ctx => new[] {new SomeObject {Name = "Jaime"}, new SomeObject {Name = "Joe"}});
 
-            var root = new ObjectGraphType();
-            root.Name = "Root";
+            var root = new ObjectGraphType {Name = "Root"};
             root.Field("hero", person, resolve: ctx => ctx.RootValue);
 
             schema.Query = root;
@@ -84,23 +77,19 @@ namespace GraphQL.Tests.Execution
         {
             var schema = new Schema();
 
-            var person = new ObjectGraphType();
-            person.Name = "Person";
+            var person = new ObjectGraphType {Name = "Person"};
             person.Field("name", new StringGraphType());
             person.IsTypeOf = type => true;
 
-            var robot = new ObjectGraphType();
-            robot.Name = "Robot";
+            var robot = new ObjectGraphType {Name = "Robot"};
             robot.Field("name", new StringGraphType());
             robot.IsTypeOf = type => true;
 
-            var personOrRobot = new UnionGraphType();
-            personOrRobot.Name = "PersonOrRobot";
+            var personOrRobot = new UnionGraphType {Name = "PersonOrRobot"};
             personOrRobot.AddPossibleType(person);
             personOrRobot.AddPossibleType(robot);
 
-            var root = new ObjectGraphType();
-            root.Name = "Root";
+            var root = new ObjectGraphType {Name = "Root"};
             root.Field("hero", personOrRobot, resolve: ctx => ctx.RootValue);
 
             schema.Query = root;
@@ -122,6 +111,8 @@ namespace GraphQL.Tests.Execution
   query: root
 }
 
+scalar Byte
+
 # The `Date` scalar type represents a year, month and day in accordance with the
 # [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard.
 scalar Date
@@ -137,6 +128,8 @@ scalar DateTime
 scalar DateTimeOffset
 
 scalar Decimal
+
+scalar Guid
 
 # The `Milliseconds` scalar type represents a period of time represented as the total number of milliseconds.
 scalar Milliseconds
@@ -149,8 +142,20 @@ type root {
   listOfObjField: [NestedObjType]
 }
 
+scalar SByte
+
 # The `Seconds` scalar type represents a period of time represented as the total number of seconds.
 scalar Seconds
+
+scalar Short
+
+scalar UInt
+
+scalar ULong
+
+scalar Uri
+
+scalar UShort
 ");
         }
 
@@ -160,6 +165,8 @@ scalar Seconds
             build_schema("non-null").ShouldBeCrossPlat(@"schema {
   query: root
 }
+
+scalar Byte
 
 # The `Date` scalar type represents a year, month and day in accordance with the
 # [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard.
@@ -176,6 +183,8 @@ scalar DateTime
 scalar DateTimeOffset
 
 scalar Decimal
+
+scalar Guid
 
 # The `Milliseconds` scalar type represents a period of time represented as the total number of milliseconds.
 scalar Milliseconds
@@ -188,8 +197,20 @@ type root {
   listOfObjField: NestedObjType!
 }
 
+scalar SByte
+
 # The `Seconds` scalar type represents a period of time represented as the total number of seconds.
 scalar Seconds
+
+scalar Short
+
+scalar UInt
+
+scalar ULong
+
+scalar Uri
+
+scalar UShort
 ");
         }
 
@@ -199,6 +220,8 @@ scalar Seconds
             build_schema("none").ShouldBeCrossPlat(@"schema {
   query: root
 }
+
+scalar Byte
 
 # The `Date` scalar type represents a year, month and day in accordance with the
 # [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) standard.
@@ -216,6 +239,8 @@ scalar DateTimeOffset
 
 scalar Decimal
 
+scalar Guid
+
 # The `Milliseconds` scalar type represents a period of time represented as the total number of milliseconds.
 scalar Milliseconds
 
@@ -227,8 +252,20 @@ type root {
   listOfObjField: NestedObjType
 }
 
+scalar SByte
+
 # The `Seconds` scalar type represents a period of time represented as the total number of seconds.
 scalar Seconds
+
+scalar Short
+
+scalar UInt
+
+scalar ULong
+
+scalar Uri
+
+scalar UShort
 ");
         }
 
@@ -298,12 +335,14 @@ scalar Seconds
             QueryArguments arguments = null,
             Func<ResolveFieldContext, object> resolve = null)
         {
-            var field = new FieldType();
-            field.Name = name;
-            field.Description = description;
-            field.Arguments = arguments;
-            field.ResolvedType = type;
-            field.Resolver = resolve != null ? new FuncFieldResolver<object>(resolve) : null;
+            var field = new FieldType
+            {
+                Name = name,
+                Description = description,
+                Arguments = arguments,
+                ResolvedType = type,
+                Resolver = resolve != null ? new FuncFieldResolver<object>(resolve) : null
+            };
             obj.AddField(field);
         }
     }

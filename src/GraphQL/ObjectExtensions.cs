@@ -121,7 +121,7 @@ namespace GraphQL
                 return ToObject(objects, fieldType);
             }
 
-            if (fieldType.GetTypeInfo().IsEnum)
+            if (fieldType.IsEnum)
             {
                 if (value == null)
                 {
@@ -160,7 +160,6 @@ namespace GraphQL
 
             return val;
         }
-
 
         /// <summary>
         /// Returns an interface implemented by the indicated type whose name matches the desired name.

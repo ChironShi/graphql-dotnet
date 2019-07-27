@@ -23,7 +23,13 @@ namespace GraphQL.Utilities
                 [typeof(DateTime)] = typeof(DateGraphType),
                 [typeof(DateTimeOffset)] = typeof(DateTimeOffsetGraphType),
                 [typeof(TimeSpan)] = typeof(TimeSpanSecondsGraphType),
-                [typeof(Guid)] = typeof(IdGraphType)
+                [typeof(Guid)] = typeof(IdGraphType),
+                [typeof(short)] = typeof(ShortGraphType),
+                [typeof(ushort)] = typeof(UShortGraphType),
+                [typeof(ulong)] = typeof(ULongGraphType),
+                [typeof(uint)] = typeof(UIntGraphType),
+                [typeof(byte)] = typeof(ByteGraphType),
+                [typeof(sbyte)] = typeof(SByteGraphType),
             };
         }
 
@@ -34,14 +40,10 @@ namespace GraphQL.Utilities
 
         public static void Register(Type clrType, Type graphType)
         {
-            _entries[clrType] = graphType;
+            _entries[clrType ?? throw new ArgumentNullException(nameof(clrType))] = graphType ?? throw new ArgumentNullException(nameof(graphType));
         }
 
-        public static Type Get<TClr>()
-        {
-            return Get(typeof(TClr));
-        }
-
+        public static Type Get<TClr>() => Get(typeof(TClr));
 
         public static Type Get(Type clrType)
         {
@@ -52,5 +54,7 @@ namespace GraphQL.Utilities
 
             return typeof(GraphType).IsAssignableFrom(clrType) ? clrType : null;
         }
+
+        public static bool Contains(Type clrType) => _entries.ContainsKey(clrType);
     }
 }

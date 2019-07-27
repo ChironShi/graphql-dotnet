@@ -14,25 +14,13 @@ namespace GraphQL.Types
 
         public IDictionary<string, object> Metadata { get; set; } = new ConcurrentDictionary<string, object>();
 
-        public TType GetMetadata<TType>(string key, TType defaultValue = default(TType))
+        public TType GetMetadata<TType>(string key, TType defaultValue = default)
         {
-            if (!HasMetadata(key))
-            {
-                return defaultValue;
-            }
-
-            if (Metadata.TryGetValue(key, out var item))
-            {
-                return (TType) item;
-            }
-
-            return defaultValue;
+            var local = Metadata;
+            return local != null && local.TryGetValue(key, out var item) ? (TType)item : defaultValue;
         }
 
-        public bool HasMetadata(string key)
-        {
-            return Metadata?.ContainsKey(key) ?? false;
-        }
+        public bool HasMetadata(string key) => Metadata?.ContainsKey(key) ?? false;
 
         public virtual string CollectTypes(TypeCollectionContext context)
         {
@@ -44,10 +32,12 @@ namespace GraphQL.Types
             return Name;
         }
 
-        protected bool Equals(IGraphType other)
-        {
-            return string.Equals(Name, other.Name);
-        }
+        public override string ToString() =>
+            string.IsNullOrWhiteSpace(Name)
+                ? GetType().Name
+                : Name;
+
+        protected bool Equals(IGraphType other) => string.Equals(Name, other.Name);
 
         public override bool Equals(object obj)
         {
@@ -58,10 +48,7 @@ namespace GraphQL.Types
             return Equals((IGraphType)obj);
         }
 
-        public override int GetHashCode()
-        {
-            return Name?.GetHashCode() ?? 0;
-        }
+        public override int GetHashCode() => Name?.GetHashCode() ?? 0;
     }
 
     /// <summary>
