@@ -85,13 +85,16 @@ namespace GraphQL.Validation.Rules
                 else
                 {
                     var cyclePath = spreadPath.Reverse().Skip(cycleIndex).ToArray();
-                    var nodes = cyclePath.OfType<INode>().Concat(new[] {spreadNode}).ToArray();
+                    var nodes = cyclePath.OfType<INode>().Concat(new[] { spreadNode }).ToArray();
 
                     context.ReportError(new ValidationError(
                         context.OriginalQuery,
                         "5.4",
                         CycleErrorMessage(spreadName, cyclePath.Select(x => x.Name).ToArray()),
-                        nodes));
+                        nodes)
+                    {
+                        Path = context.TypeInfo.GetPath()
+                    });
                 }
             }
 

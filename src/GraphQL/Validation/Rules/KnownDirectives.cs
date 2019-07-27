@@ -31,7 +31,10 @@ namespace GraphQL.Validation.Rules
                     var directiveDef = context.Schema.FindDirective(node.Name);
                     if (directiveDef == null)
                     {
-                        context.ReportError(new ValidationError(context.OriginalQuery, "5.6.1", UnknownDirectiveMessage(node.Name), node));
+                        context.ReportError(new ValidationError(context.OriginalQuery, "5.6.1", UnknownDirectiveMessage(node.Name), node)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        });
                         return;
                     }
 
@@ -42,7 +45,10 @@ namespace GraphQL.Validation.Rules
                             context.OriginalQuery,
                             "5.6.1",
                             MisplacedDirectiveMessage(node.Name, candidateLocation.ToString()),
-                            node));
+                            node)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        });
                     }
                 });
             });

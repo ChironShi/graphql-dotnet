@@ -1,4 +1,4 @@
-﻿using GraphQL.Language.AST;
+using GraphQL.Language.AST;
 
 namespace GraphQL.Validation.Rules
 {
@@ -34,7 +34,10 @@ namespace GraphQL.Validation.Rules
                             context.OriginalQuery,
                             "5.4.1.3",
                             InlineFragmentOnNonCompositeErrorMessage(context.Print(node.Type)),
-                            node.Type));
+                            node.Type)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        });
                     }
                 });
 
@@ -47,7 +50,10 @@ namespace GraphQL.Validation.Rules
                             context.OriginalQuery,
                             "5.4.1.3",
                             FragmentOnNonCompositeErrorMessage(node.Name, context.Print(node.Type)),
-                            node.Type));
+                            node.Type)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        });
                     }
                 });
             });

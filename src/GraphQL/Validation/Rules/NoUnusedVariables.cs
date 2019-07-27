@@ -41,7 +41,10 @@ namespace GraphQL.Validation.Rules
                         var variableName = variableDef.Name;
                         if (!usages.Contains(variableName))
                         {
-                            var error = new ValidationError(context.OriginalQuery, "5.7.5", UnusedVariableMessage(variableName, op.Name), variableDef);
+                            var error = new ValidationError(context.OriginalQuery, "5.7.5", UnusedVariableMessage(variableName, op.Name), variableDef)
+                            {
+                                Path = context.TypeInfo.GetPath()
+                            };
                             context.ReportError(error);
                         }
                     }

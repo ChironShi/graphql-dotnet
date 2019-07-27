@@ -45,7 +45,10 @@ namespace GraphQL.Validation.Rules
                                 name,
                                 context.Print(nonNullType),
                                 context.Print(nonNullType.ResolvedType)),
-                            defaultValue));
+                            defaultValue)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        });
                     }
 
                     if (inputType != null && defaultValue != null)
@@ -61,7 +64,10 @@ namespace GraphQL.Validation.Rules
                                     context.Print(inputType),
                                     context.Print(defaultValue),
                                     errors),
-                                defaultValue));
+                                defaultValue)
+                            {
+                                Path = context.TypeInfo.GetPath()
+                            });
                         }
                     }
                 });

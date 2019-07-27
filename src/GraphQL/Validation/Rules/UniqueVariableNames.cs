@@ -34,7 +34,10 @@ namespace GraphQL.Validation.Rules
                             "5.7.1",
                             DuplicateVariableMessage(variableName),
                             knownVariables[variableName],
-                            variableDefinition);
+                            variableDefinition)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        };
                         context.ReportError(error);
                     }
                     else

@@ -66,7 +66,10 @@ namespace GraphQL.Validation.Rules
                         "5.6.3",
                         DuplicateDirectiveMessage(directive.Name),
                         knownDirectives[directive.Name],
-                        directive);
+                        directive)
+                    {
+                        Path = context.TypeInfo.GetPath()
+                    };
 
                     context.ReportError(error);
                 }

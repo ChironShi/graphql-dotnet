@@ -39,7 +39,10 @@ namespace GraphQL.Validation.Rules
 
                         if (!fragmentNamesUsed.Contains(fragName))
                         {
-                            var error = new ValidationError(context.OriginalQuery, "5.4.1.4", UnusedFragMessage(fragName), fragmentDef);
+                            var error = new ValidationError(context.OriginalQuery, "5.4.1.4", UnusedFragMessage(fragName), fragmentDef)
+                            {
+                                Path = context.TypeInfo.GetPath()
+                            };
                             context.ReportError(error);
                         }
                     }

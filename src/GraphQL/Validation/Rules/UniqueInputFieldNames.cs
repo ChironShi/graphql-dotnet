@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using GraphQL.Language.AST;
 
@@ -43,7 +43,10 @@ namespace GraphQL.Validation.Rules
                                 "5.5.1",
                                 DuplicateInputField(objField.Name),
                                 knownNames[objField.Name],
-                                objField.Value));
+                                objField.Value)
+                            {
+                                Path = context.TypeInfo.GetPath()
+                            });
                         }
                         else
                         {

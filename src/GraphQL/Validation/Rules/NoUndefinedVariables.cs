@@ -40,7 +40,10 @@ namespace GraphQL.Validation.Rules
                                     "5.7.4",
                                     UndefinedVarMessage(varName, op.Name),
                                     usage.Node,
-                                    op);
+                                    op)
+                                {
+                                    Path = context.TypeInfo.GetPath()
+                                };
                                 context.ReportError(error);
                             }
                         }

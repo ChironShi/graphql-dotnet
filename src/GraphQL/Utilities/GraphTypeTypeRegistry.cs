@@ -1,6 +1,7 @@
+using GraphQL.Types;
 using System;
 using System.Collections.Generic;
-using GraphQL.Types;
+using System.Reflection;
 
 namespace GraphQL.Utilities
 {
@@ -26,7 +27,7 @@ namespace GraphQL.Utilities
             };
         }
 
-        public static void Register<T, TGraph>()  where TGraph : GraphType
+        public static void Register<T, TGraph>() where TGraph : GraphType
         {
             Register(typeof(T), typeof(TGraph));
         }
@@ -36,7 +37,7 @@ namespace GraphQL.Utilities
             _entries[clrType] = graphType;
         }
 
-        public static Type Get<TClr>() 
+        public static Type Get<TClr>()
         {
             return Get(typeof(TClr));
         }
@@ -49,7 +50,7 @@ namespace GraphQL.Utilities
                 return graphType;
             }
 
-            return null;
+            return typeof(GraphType).IsAssignableFrom(clrType) ? clrType : null;
         }
     }
 }

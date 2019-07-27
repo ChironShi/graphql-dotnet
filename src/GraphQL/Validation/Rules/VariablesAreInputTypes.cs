@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using GraphQL.Language.AST;
 using GraphQL.Types;
 
@@ -25,7 +25,10 @@ namespace GraphQL.Validation.Rules
 
                     if (!type.IsInputType())
                     {
-                        context.ReportError(new ValidationError(context.OriginalQuery, "5.7.3", UndefinedVarMessage(varDef.Name, type != null ? context.Print(type) : varDef.Type.Name()), varDef));
+                        context.ReportError(new ValidationError(context.OriginalQuery, "5.7.3", UndefinedVarMessage(varDef.Name, type != null ? context.Print(type) : varDef.Type.Name()), varDef)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        });
                     }
                 });
             });

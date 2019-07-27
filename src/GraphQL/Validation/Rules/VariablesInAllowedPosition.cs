@@ -47,7 +47,10 @@ namespace GraphQL.Validation.Rules
                                     var error = new ValidationError(
                                         context.OriginalQuery,
                                         "5.7.6",
-                                        BadVarPosMessage(varName, context.Print(varType), context.Print(usage.Type)));
+                                        BadVarPosMessage(varName, context.Print(varType), context.Print(usage.Type)))
+                                    {
+                                        Path = context.TypeInfo.GetPath()
+                                    };
 
                                     var source = new Source(context.OriginalQuery);
                                     var varDefPos = new Location(source, varDef.SourceLocation.Start);

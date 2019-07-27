@@ -1,4 +1,4 @@
-﻿using GraphQL.Language.AST;
+using GraphQL.Language.AST;
 using GraphQL.Types;
 
 namespace GraphQL.Validation.Rules
@@ -37,7 +37,10 @@ namespace GraphQL.Validation.Rules
                             context.OriginalQuery,
                             "5.4.2.3",
                             TypeIncompatibleAnonSpreadMessage(context.Print(parentType), context.Print(fragType)),
-                            node));
+                            node)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        });
                     }
                 });
 
@@ -53,7 +56,10 @@ namespace GraphQL.Validation.Rules
                             context.OriginalQuery,
                             "5.4.2.3",
                             TypeIncompatibleSpreadMessage(fragName, context.Print(parentType), context.Print(fragType)),
-                            node));
+                            node)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        });
                     }
                 });
             });

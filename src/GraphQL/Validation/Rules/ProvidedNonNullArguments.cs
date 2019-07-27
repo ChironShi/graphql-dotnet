@@ -46,7 +46,10 @@ namespace GraphQL.Validation.Rules
                                     context.OriginalQuery,
                                     "5.3.3.2",
                                     MissingFieldArgMessage(node.Name, arg.Name, context.Print(type)),
-                                    node));
+                                    node)
+                                {
+                                    Path = context.TypeInfo.GetPath()
+                                });
                         }
                     }
                 });
@@ -72,7 +75,10 @@ namespace GraphQL.Validation.Rules
                                     context.OriginalQuery,
                                     "5.3.3.2",
                                     MissingDirectiveArgMessage(node.Name, arg.Name, context.Print(type)),
-                                    node));
+                                    node)
+                                {
+                                    Path = context.TypeInfo.GetPath()
+                                });
                         }
                     }
                 });

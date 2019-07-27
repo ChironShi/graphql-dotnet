@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using GraphQL.Language.AST;
 
 namespace GraphQL.Validation.Rules
@@ -31,7 +31,10 @@ namespace GraphQL.Validation.Rules
                             "5.4.1.1",
                             DuplicateFragmentNameMessage(fragmentName),
                             knownFragments[fragmentName],
-                            fragmentDefinition);
+                            fragmentDefinition)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        };
                         context.ReportError(error);
                     }
                     else

@@ -143,13 +143,12 @@
              This function is commutative.
              </summary>
         </member>
-        <member name="M:GraphQL.Http.DocumentWriterExtensions.WriteToStringAsync(GraphQL.Http.IDocumentWriter,GraphQL.ExecutionResult,System.Text.Encoding)">
+        <member name="M:GraphQL.Http.DocumentWriterExtensions.WriteToStringAsync(GraphQL.Http.IDocumentWriter,GraphQL.ExecutionResult)">
             <summary>
             Writes the <paramref name="value"/> to string.
             </summary>
             <param name="writer"></param>
             <param name="value"></param>
-            <param name="encoding"></param>
             <returns></returns>
         </member>
         <member name="T:GraphQL.Http.HttpResponseStreamWriter">

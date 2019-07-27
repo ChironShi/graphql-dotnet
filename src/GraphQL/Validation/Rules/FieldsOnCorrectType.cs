@@ -6,13 +6,13 @@ using GraphQL.Utilities;
 
 namespace GraphQL.Validation.Rules
 {
-  /// <summary>
-  /// Fields on correct type
-  ///
-  /// A GraphQL document is only valid if all fields selected are defined by the
-  /// parent type, or are an allowed meta field such as __typename
-  /// </summary>
-  public class FieldsOnCorrectType : IValidationRule
+    /// <summary>
+    /// Fields on correct type
+    ///
+    /// A GraphQL document is only valid if all fields selected are defined by the
+    /// parent type, or are an allowed meta field such as __typename
+    /// </summary>
+    public class FieldsOnCorrectType : IValidationRule
     {
         public string UndefinedFieldMessage(
             string fieldName,
@@ -56,7 +56,7 @@ namespace GraphQL.Validation.Rules
 
                             // If there are no suggested types, then perhaps this was a typo?
                             var suggestedFieldNames = suggestedTypeNames.Any()
-                                ? new string[] {}
+                                ? new string[] { }
                                 : getSuggestedFieldNames(type, fieldName);
 
                             // Report an error, including helpful suggestions.
@@ -65,7 +65,10 @@ namespace GraphQL.Validation.Rules
                                 "5.2.1",
                                 UndefinedFieldMessage(fieldName, type.Name, suggestedTypeNames, suggestedFieldNames),
                                 node
-                                ));
+                                )
+                            {
+                                Path = context.TypeInfo.GetPath()
+                            });
                         }
                     }
                 });

@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using GraphQL.Language.AST;
 using GraphQL.Utilities;
 
@@ -58,10 +58,14 @@ namespace GraphQL.Validation.Rules
                                         fieldDef.Name,
                                         context.Print(parentType),
                                         StringUtils.SuggestionList(node.Name, fieldDef.Arguments?.Select(q => q.Name))),
-                                    node));
+                                    node)
+                                {
+                                    Path = context.TypeInfo.GetPath()
+                                });
                             }
                         }
-                    } else if (argumentOf is Directive)
+                    }
+                    else if (argumentOf is Directive)
                     {
                         var directive = context.TypeInfo.GetDirective();
                         if (directive != null)
@@ -76,7 +80,10 @@ namespace GraphQL.Validation.Rules
                                         node.Name,
                                         directive.Name,
                                         StringUtils.SuggestionList(node.Name, directive.Arguments?.Select(q => q.Name))),
-                                    node));
+                                    node)
+                                {
+                                    Path = context.TypeInfo.GetPath()
+                                });
                             }
                         }
                     }

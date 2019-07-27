@@ -22,6 +22,11 @@ namespace GraphQL.Validation
             _schema = schema;
         }
 
+        public string[] GetPath()
+        {
+            return _ancestorStack.Select(x => x as Field).Where(d => d != null).Select(d => string.IsNullOrEmpty(d.Alias) ? d.Name : d.Alias).Reverse().ToArray();
+        }
+
         public INode[] GetAncestors()
         {
             return _ancestorStack.Select(x => x).Skip(1).Reverse().ToArray();
@@ -235,7 +240,7 @@ namespace GraphQL.Validation
 
             if (parentType is IObjectGraphType || parentType is IInterfaceGraphType)
             {
-                var complexType = (IComplexGraphType) parentType;
+                var complexType = (IComplexGraphType)parentType;
 
                 return complexType.GetField(field.Name);
             }

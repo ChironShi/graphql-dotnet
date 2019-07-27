@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using GraphQL.Language.AST;
 
 namespace GraphQL.Validation.Rules
@@ -29,7 +29,10 @@ namespace GraphQL.Validation.Rules
                             context.OriginalQuery,
                             "5.1.2.1",
                             AnonOperationNotAloneMessage(),
-                            op);
+                            op)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        };
                         context.ReportError(error);
                     }
                 });

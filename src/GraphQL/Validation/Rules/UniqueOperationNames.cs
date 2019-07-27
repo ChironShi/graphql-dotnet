@@ -38,7 +38,10 @@ namespace GraphQL.Validation.Rules
                                 context.OriginalQuery,
                                 "5.1.1.1",
                                 DuplicateOperationNameMessage(op.Name),
-                                op);
+                                op)
+                            {
+                                Path = context.TypeInfo.GetPath()
+                            };
                             context.ReportError(error);
                         }
                     });

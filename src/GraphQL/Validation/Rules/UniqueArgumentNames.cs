@@ -28,7 +28,10 @@ namespace GraphQL.Validation.Rules
                             "5.3.2",
                             DuplicateArgMessage(argName),
                             knownArgs[argName],
-                            argument);
+                            argument)
+                        {
+                            Path = context.TypeInfo.GetPath()
+                        };
                         context.ReportError(error);
                     }
                     else
