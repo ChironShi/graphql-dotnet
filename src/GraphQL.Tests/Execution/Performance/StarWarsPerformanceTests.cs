@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Threading;
 using GraphQL.Conversion;
 using GraphQL.Tests.StarWars;
 using Xunit;
@@ -16,7 +15,7 @@ namespace GraphQL.Tests.Execution.Performance
             _output = output;
         }
 
-        [Fact(Skip = "Benchmarks only, these numbers are machine dependant.")]
+        [Fact(Skip = "Benchmarks only, these numbers are machine dependent.")]
         // [Fact]
         public void Executes_StarWarsBasicQuery_Performant()
         {
@@ -50,7 +49,7 @@ namespace GraphQL.Tests.Execution.Performance
                     _.Root = null;
                     _.Inputs = null;
                     _.UserContext = null;
-                    _.CancellationToken = default(CancellationToken);
+                    _.CancellationToken = default;
                     _.ValidationRules = null;
                     _.FieldNameConverter = new CamelCaseFieldNameConverter();
                 }).GetAwaiter().GetResult();

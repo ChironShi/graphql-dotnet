@@ -48,7 +48,7 @@ namespace GraphQL.Tests
             Inputs inputs = null,
             object root = null,
             IDictionary<string, object> userContext = null,
-            CancellationToken cancellationToken = default(CancellationToken),
+            CancellationToken cancellationToken = default,
             IEnumerable<IValidationRule> rules = null)
         {
             var queryResult = CreateQueryResult(expected);
@@ -61,7 +61,7 @@ namespace GraphQL.Tests
             Inputs inputs = null,
             object root = null,
             IDictionary<string, object> userContext = null,
-            CancellationToken cancellationToken = default(CancellationToken),
+            CancellationToken cancellationToken = default,
             int expectedErrorCount = 0,
             bool renderErrors = false)
         {
@@ -83,7 +83,7 @@ namespace GraphQL.Tests
             Inputs inputs= null,
             object root = null,
             IDictionary<string, object> userContext = null,
-            CancellationToken cancellationToken = default(CancellationToken),
+            CancellationToken cancellationToken = default,
             int expectedErrorCount = 0,
             bool renderErrors = false)
         {
@@ -106,7 +106,7 @@ namespace GraphQL.Tests
 //             Console.WriteLine(writtenResult);
 // #endif
 
-            writtenResult.ShouldBe(expectedResult);
+            writtenResult.ShouldBeCrossPlat(expectedResult);
 
             var errors = runResult.Errors ?? new ExecutionErrors();
 
@@ -121,7 +121,7 @@ namespace GraphQL.Tests
             Inputs inputs,
             object root,
             IDictionary<string, object> userContext = null,
-            CancellationToken cancellationToken = default(CancellationToken),
+            CancellationToken cancellationToken = default,
             IEnumerable<IValidationRule> rules = null)
         {
             var runResult = Executer.ExecuteAsync(_ =>
@@ -152,7 +152,7 @@ namespace GraphQL.Tests
                     .Select(x => x.InnerException.Message));
             }
 
-            writtenResult.ShouldBe(expectedResult, additionalInfo);
+            writtenResult.ShouldBeCrossPlat(expectedResult, additionalInfo);
 
             return runResult;
         }
