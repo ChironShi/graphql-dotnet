@@ -1,4 +1,5 @@
 using GraphQL.Validation;
+using System.Collections.Generic;
 using Xunit;
 
 namespace GraphQL.Tests.StarWars
@@ -93,6 +94,7 @@ namespace GraphQL.Tests.StarWars
             var errors = new ExecutionErrors();
             var error = new ValidationError(query, "5.4.2.1", @"Unknown fragment ""unknown_fragment"".");
             error.AddLocation(4, 25);
+            error.Path = new List<string> { "r2d2" };
             errors.Add(error);
 
             AssertQuery(query, CreateQueryResult(null, errors), null, null);
