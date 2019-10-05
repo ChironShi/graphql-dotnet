@@ -90,66 +90,17 @@ namespace GraphQL.Http
 
         public override void Write(char value)
         {
-            if (_disposed)
-            {
-                throw new ObjectDisposedException(nameof(HttpResponseStreamWriter));
-            }
-
-            if (_charBufferCount == _charBufferSize)
-            {
-                FlushInternal(flushEncoder: false);
-            }
-
-            _charBuffer[_charBufferCount] = value;
-            _charBufferCount++;
+            Task.Run(async () => await WriteAsync(value)).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public override void Write(char[] values, int index, int count)
         {
-            if (_disposed)
-            {
-                throw new ObjectDisposedException(nameof(HttpResponseStreamWriter));
-            }
-
-            if (values == null)
-            {
-                return;
-            }
-
-            while (count > 0)
-            {
-                if (_charBufferCount == _charBufferSize)
-                {
-                    FlushInternal(flushEncoder: false);
-                }
-
-                CopyToCharBuffer(values, ref index, ref count);
-            }
+            Task.Run(async () => await WriteAsync(values, index, count)).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public override void Write(string value)
         {
-            if (_disposed)
-            {
-                throw new ObjectDisposedException(nameof(HttpResponseStreamWriter));
-            }
-
-            if (value == null)
-            {
-                return;
-            }
-
-            var count = value.Length;
-            var index = 0;
-            while (count > 0)
-            {
-                if (_charBufferCount == _charBufferSize)
-                {
-                    FlushInternal(flushEncoder: false);
-                }
-
-                CopyToCharBuffer(value, ref index, ref count);
-            }
+            Task.Run(async () => await WriteAsync(value)).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public override async Task WriteAsync(char value)
@@ -262,25 +213,7 @@ namespace GraphQL.Http
         // chunking.
         private void FlushInternal(bool flushEncoder)
         {
-            if (_charBufferCount == 0)
-            {
-                return;
-            }
-
-            var count = _encoder.GetBytes(
-                _charBuffer,
-                0,
-                _charBufferCount,
-                _byteBuffer,
-                0,
-                flush: flushEncoder);
-
-            _charBufferCount = 0;
-
-            if (count > 0)
-            {
-                _stream.Write(_byteBuffer, 0, count);
-            }
+            Task.Run(async () => await FlushInternalAsync(flushEncoder)).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         // Note: our FlushInternalAsync method does NOT flush the underlying stream. This would result in

@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>GraphQL for .NET</Description>
-    <VersionPrefix>2.4.0-cs-1</VersionPrefix>
+    <VersionPrefix>2.4.2-cs-2</VersionPrefix>
     <Authors>Joe McBride</Authors>
     <TargetFrameworks>netstandard2.0;netstandard1.3;net45</TargetFrameworks>
     <AssemblyName>GraphQL</AssemblyName>
