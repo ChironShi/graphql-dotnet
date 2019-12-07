@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace GraphQL.DataLoader
 
         protected Task<T> DataLoaded => _completionSource.Task;
         private TaskCompletionSource<T> _completionSource = new TaskCompletionSource<T>();
+
+        protected List<Task<T>> PaddingLoadTasks { get; } = new List<Task<T>>();
 
         protected abstract bool IsFetchNeeded();
 
@@ -30,6 +33,7 @@ namespace GraphQL.DataLoader
                 return;
             }
 
+            PaddingLoadTasks.Add(tcs.Task);
             try
             {
                 var result = await FetchAsync(cancellationToken)
@@ -45,6 +49,7 @@ namespace GraphQL.DataLoader
             {
                 tcs.SetException(ex);
             }
+            PaddingLoadTasks.Remove(tcs.Task);
         }
     }
 }

@@ -69,7 +69,7 @@ namespace GraphQL.DataLoader
             }
 
             var result = await DataLoaded;
-
+            ReTry:
             if (result.TryGetValue(key, out T value))
             {
                 return value;
@@ -83,6 +83,13 @@ namespace GraphQL.DataLoader
                         return cacheValue;
                     }
                 }
+                var plTask = PaddingLoadTasks.FirstOrDefault();
+                if (plTask != null)
+                {
+                    result = await plTask;
+                    goto ReTry;
+                }
+
                 return _defaultValue;
             }
         }
@@ -106,8 +113,9 @@ namespace GraphQL.DataLoader
                 _pendingKeys.Clear();
             }
 
-            var dictionary = await _loader(keys, cancellationToken).ConfigureAwait(false);
+            if (!keys.Any()) return new Dictionary<TKey, T>();
 
+            var dictionary = await _loader(keys, cancellationToken).ConfigureAwait(false);
             // Populate cache
             lock (_cache)
             {
@@ -123,7 +131,6 @@ namespace GraphQL.DataLoader
                     }
                 }
             }
-
             return dictionary;
         }
     }
