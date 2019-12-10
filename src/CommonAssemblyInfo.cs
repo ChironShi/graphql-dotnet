@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-[assembly: AssemblyDescription("GraphQL for .NET")]
+[assembly: AssemblyDescription("GraphQL for .NET\r\n2.4.2-cs-3    ¸üÐÂDataLoader Ö´ÐÐÂß¼­")]
 [assembly: AssemblyTitle("GraphQL")]
 [assembly: AssemblyProduct("GraphQL")]
 [assembly: AssemblyCopyright("Copyright 2015-2017 Joseph T. McBride et al.  All rights reserved.")]

@@ -44,14 +44,14 @@
             <param name="fetchFunc">A delegate to fetch data asynchronously</param>
             <returns>A new or existing DataLoader instance</returns>
         </member>
-        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Collections.Generic.IDictionary{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0},``1)”忽略有格式错误的 XML 注释 -->
-        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Collections.Generic.IDictionary{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0},``1)”忽略有格式错误的 XML 注释 -->
-        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0},``1)”忽略有格式错误的 XML 注释 -->
-        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0},``1)”忽略有格式错误的 XML 注释 -->
-        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Linq.ILookup{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0})”忽略有格式错误的 XML 注释 -->
-        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Linq.ILookup{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0})”忽略有格式错误的 XML 注释 -->
-        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0})”忽略有格式错误的 XML 注释 -->
-        <!-- 对于成员“M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0})”忽略有格式错误的 XML 注释 -->
+        <!-- Badly formed XML comment ignored for member "M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Collections.Generic.IDictionary{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0},``1)" -->
+        <!-- Badly formed XML comment ignored for member "M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Collections.Generic.IDictionary{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0},``1)" -->
+        <!-- Badly formed XML comment ignored for member "M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0},``1)" -->
+        <!-- Badly formed XML comment ignored for member "M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0},``1)" -->
+        <!-- Badly formed XML comment ignored for member "M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Linq.ILookup{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Linq.ILookup{``0,``1}}},System.Collections.Generic.IEqualityComparer{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0})" -->
+        <!-- Badly formed XML comment ignored for member "M:GraphQL.DataLoader.DataLoaderContextExtensions.GetOrAddCollectionBatchLoader``2(GraphQL.DataLoader.DataLoaderContext,System.String,System.Func{System.Collections.Generic.IEnumerable{``0},System.Threading.Tasks.Task{System.Collections.Generic.IEnumerable{``1}}},System.Func{``1,``0},System.Collections.Generic.IEqualityComparer{``0})" -->
         <member name="T:GraphQL.DataLoader.DataLoaderDocumentListener">
             <summary>
             Used to manage the <seealso cref="T:GraphQL.DataLoader.DataLoaderContext"/>
@@ -709,12 +709,7 @@
             </summary>
         </member>
         <member name="T:GraphQL.Validation.Rules.ArgumentsOfCorrectType">
-             <summary>
-             Argument values of correct type
-            
-             A GraphQL document is only valid if all field argument literal values are
-             of the type expected by their position.
-             </summary>
+            <summary>     /// Argument values of correct type     ///     /// A GraphQL document is only valid if all field argument literal values are     /// of the type expected by their position.     /// </summary> 
         </member>
         <member name="T:GraphQL.Validation.Rules.DefaultValuesOfCorrectType">
              <summary>
