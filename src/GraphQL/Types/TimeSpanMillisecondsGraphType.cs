@@ -14,23 +14,22 @@ namespace GraphQL.Types
 
         public override object Serialize(object value)
         {
-            if (value is TimeSpan timeSpan)
-            {
-                return (long)timeSpan.TotalMilliseconds;
-            }
-
-            return null;
+            var v = ParseValue(value) as TimeSpan?;
+            return v?.TotalMilliseconds;
         }
 
         public override object ParseValue(object value)
         {
-            if (value is int i)
+            if (value is TimeSpan timeSpan) return timeSpan;
+
+            if (value is int || value is long || value is float || value is double || value is decimal)
             {
-                return TimeSpan.FromMilliseconds(i);
+                return TimeSpan.FromMilliseconds(Convert.ToDouble(value));
             }
-            else if (value is long l)
+
+            if (value is string strVal)
             {
-                return TimeSpan.FromMilliseconds(l);
+                return TimeSpan.TryParse(strVal, out var ts) ? ts : null as TimeSpan?;
             }
 
             return null;
@@ -38,22 +37,7 @@ namespace GraphQL.Types
 
         public override object ParseLiteral(IValue value)
         {
-            if (value is TimeSpanValue spanValue)
-            {
-                return ParseValue(spanValue.Value);
-            }
-
-            if (value is LongValue longValue)
-            {
-                return ParseValue(longValue.Value);
-            }
-
-            if (value is IntValue intValue)
-            {
-                return ParseValue(intValue.Value);
-            }
-
-            return null;
+            return ParseValue(value?.Value);
         }
     }
 }
